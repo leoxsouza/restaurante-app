@@ -1,13 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api/menuitem';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-menu',
+    template: `
+        <p-menubar [model]="items">
+          <div>
+              <button type="button" pButton label="Sair" icon="pi pi-power-off" style="margin-left:.25em"></button>
+          </div>
+        </p-menubar>
+
+    `
 })
-export class AppComponent {
-  title = 'restaurante-app';
+export class AppMenuComponent implements OnInit {
 
   items: MenuItem[];
 
@@ -37,4 +42,5 @@ export class AppComponent {
         }
     ];
 }
+
 }
