@@ -10,6 +10,7 @@ import { PRIMENG_IMPORTS } from './primeng-imports';
 import { AppMenuComponent } from './app.menu.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './login/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AuthService } from './login/auth.service';
     BrowserAnimationsModule,
     ButtonModule,
     MenubarModule,
-    PRIMENG_IMPORTS
+    PRIMENG_IMPORTS,
+    HttpClientModule
 
   ],
   providers: [AuthService],

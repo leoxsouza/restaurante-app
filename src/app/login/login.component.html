@@ -1,15 +1,15 @@
-<div class="card" style="width: 50%; height: 50%; margin: auto">
-    <div class="p-field p-grid">
-        <label for="usuario" class="p-col-fixed" style="width:100px;">Usuário</label>
+<div class="card div-login">
+    <div class="p-field p-grid margin-y-10">
+        <label for="login" class="p-col-fixed label-orange" style="width:100px;">LOGIN</label>
         <div class="p-col">
-            <input [(ngModel)]="usuario.usuario" id="usuario" type="text" pInputText> 
+            <input [(ngModel)]="usuario.login" id="login" type="text" pInputText>
         </div>
     </div>
-    <div class="p-field p-grid">
-        <label for="senha" class="p-col-fixed" style="width:100px">Senha</label>
+    <div class="p-field p-grid margin-y-10">
+        <label for="senha" class="p-col-fixed label-orange" style="width:100px">SENHA</label>
         <div class="p-col">
-            <input [(ngModel)]="usuario.senha" id="senha" type="password" pInputText> 
+            <input [(ngModel)]="usuario.senha" id="senha" type="password" pInputText>
         </div>
     </div>
-    <p-button label="Login" (click)="fazerLogin()"></p-button>
+    <p-button label="ENTRAR" (click)="fazerLogin()" [disabled]="!usuario.login || !usuario.senha"></p-button>
 </div>

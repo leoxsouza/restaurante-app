@@ -1,5 +1,5 @@
 export class Usuario {
 
-    usuario: string;
+    login: string;
     senha: string;
 }
