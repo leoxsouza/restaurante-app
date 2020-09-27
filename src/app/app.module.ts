@@ -8,11 +8,14 @@ import {ButtonModule} from 'primeng/button';
 import {MenubarModule} from 'primeng/menubar';
 import { PRIMENG_IMPORTS } from './primeng-imports';
 import { AppMenuComponent } from './app.menu.component';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './login/auth.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppMenuComponent
+    AppMenuComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,7 @@ import { AppMenuComponent } from './app.menu.component';
     PRIMENG_IMPORTS
 
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
