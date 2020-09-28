@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api/menuitem';
 import { AuthService } from './login/auth.service';
 
@@ -7,12 +8,12 @@ import { AuthService } from './login/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'restaurante-app';
 
   mostrarMenu: boolean = false;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
 
   }
 
@@ -20,5 +21,9 @@ export class AppComponent {
       this.authService.mostrarMenuEmitter.subscribe(
           mostrar => this.mostrarMenu = mostrar
       );
+
+      if (localStorage.getItem('token') == null) {
+        this.router.navigate(['login']);
+      }
     }
 }

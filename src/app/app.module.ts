@@ -11,12 +11,14 @@ import { AppMenuComponent } from './app.menu.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './login/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpInterceptorModule } from './service/header-interceptor.service';
+import { UsuarioModule } from './components/usuario/usuario.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppMenuComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,9 @@ import { HttpClientModule } from '@angular/common/http';
     ButtonModule,
     MenubarModule,
     PRIMENG_IMPORTS,
-    HttpClientModule
+    HttpClientModule,
+    HttpInterceptorModule,
+    UsuarioModule
 
   ],
   providers: [AuthService],

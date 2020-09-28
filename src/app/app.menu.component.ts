@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api/menuitem';
 
 @Component({
@@ -6,7 +7,7 @@ import { MenuItem } from 'primeng/api/menuitem';
     template: `
         <p-menubar [model]="items">
           <div>
-              <button type="button" pButton label="Sair" icon="pi pi-power-off" style="margin-left:.25em"></button>
+              <button (click)="sair()" type="button" pButton label="Sair" icon="pi pi-power-off" style="margin-left:.25em"></button>
           </div>
         </p-menubar>
 
@@ -15,6 +16,10 @@ import { MenuItem } from 'primeng/api/menuitem';
 export class AppMenuComponent implements OnInit {
 
   items: MenuItem[];
+
+  mostrarMenuEmitter = new EventEmitter<boolean>();
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.items = [
@@ -42,5 +47,11 @@ export class AppMenuComponent implements OnInit {
         }
     ];
 }
+
+    public sair() {
+        localStorage.clear();
+        this.mostrarMenuEmitter.emit(false);
+        this.router.navigate(['login']);
+    }
 
 }
