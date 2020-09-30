@@ -13,6 +13,7 @@ import { AuthService } from './login/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpInterceptorModule } from './service/header-interceptor.service';
 import { UsuarioModule } from './components/usuario/usuario.module';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { UsuarioModule } from './components/usuario/usuario.module';
     UsuarioModule
 
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
