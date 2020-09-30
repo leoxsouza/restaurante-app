@@ -1,1 +1,27 @@
-<p>usuario works!</p>
+<div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-12">
+                    <h1>Listar Usuários</h1>
+                </div>
+
+                <div class="ui-g ui-md-11 form-buttons">
+                    <div class="ui-g-2 ui-md-2 ui-sm-12" >
+                        <button pButton label="Pesquisar" icon="ui-icon-search"
+                            class="pesquisar-btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left"
+                            >
+                        </button>
+                    </div>
+
+                    <div class="ui-g-2 ui-md-2 ui-sm-12">
+                        <button class="novo-btn" pButton label="Cadastrar" [routerLink]="['/ncm', 'inserir']"
+                            icon="ui-icon-add">
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
