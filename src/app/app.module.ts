@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpInterceptorModule } from './service/header-interceptor.service';
 import { UsuarioModule } from './components/usuario/usuario.module';
 import { AuthGuard } from './guards/auth.guard';
+import { BlockUIModule } from 'ng-block-ui';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AuthGuard } from './guards/auth.guard';
     PRIMENG_IMPORTS,
     HttpClientModule,
     HttpInterceptorModule,
-    UsuarioModule
+    UsuarioModule,
+    BlockUIModule.forRoot(),
 
   ],
   providers: [AuthService, AuthGuard],

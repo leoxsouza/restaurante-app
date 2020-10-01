@@ -6,6 +6,8 @@ import { PRIMENG_IMPORTS } from 'src/app/primeng-imports';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { UsuarioComponent } from './usuario.component';
+import { UsuarioFormComponent } from './usuario-form/usuario-form.component';
+import { ConfirmationService } from 'primeng/api';
 
 
 let ENTITY_STATES = [
@@ -13,7 +15,7 @@ let ENTITY_STATES = [
 ];
 
 @NgModule({
-  declarations: [UsuarioComponent],
+  declarations: [UsuarioComponent, UsuarioFormComponent],
   imports: [
     CommonModule,
     RouterModule.forRoot( ENTITY_STATES, { useHash: true } ),
@@ -21,6 +23,7 @@ let ENTITY_STATES = [
     FormsModule,
     BrowserModule,
   ],
-    schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  providers: [ConfirmationService],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class UsuarioModule { }

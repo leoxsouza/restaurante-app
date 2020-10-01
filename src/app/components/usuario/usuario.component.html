@@ -1,27 +1,50 @@
-<div class="ui-g ui-fluid">
-    <div class="ui-g-12">
-        <div class="card card-w-title">
-            <div class="ui-g">
-                <div class="ui-g-12 ui-md-12">
-                    <h1>Listar Usuários</h1>
-                </div>
+<div class="margin-20">
 
-                <div class="ui-g ui-md-11 form-buttons">
-                    <div class="ui-g-2 ui-md-2 ui-sm-12" >
-                        <button pButton label="Pesquisar" icon="ui-icon-search"
-                            class="pesquisar-btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left"
-                            >
-                        </button>
-                    </div>
-
-                    <div class="ui-g-2 ui-md-2 ui-sm-12">
-                        <button class="novo-btn" pButton label="Cadastrar" [routerLink]="['/ncm', 'inserir']"
-                            icon="ui-icon-add">
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+    <div>
+        <h1 class="text-center">Listar Usuários</h1>
     </div>
+
+    <div class="p-grid">
+        <button pButton label="Pesquisar" class="ui-button p-col-5 p-lg-3" icon="pi pi-search">
+        </button>
+
+        <div class="p-col-2"></div>
+
+
+        <button class="p-col-5 p-lg-3" pButton label="Cadastrar" icon="pi pi-user-plus"
+            [routerLink]="['/usuario', 'cadastrar']">
+        </button>
+    </div>
+
+    <div class="card margin-y-10">
+        <p-table [value]="usuarioList" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]"
+            styleClass="p-datatable-striped">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Nome</th>
+                    <th>Login</th>
+                    <th>Ações</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-usuario>
+                <tr>
+                    <td>{{usuario.login}}</td>
+                    <td>{{usuario.senha}}</td>
+                    <td>
+                        <i class="pi pi-eye margin-right-5 click color-blue" (click)="visualizarUsuario(usuario.id)"></i>
+                        <i class="pi pi-user-edit margin-right-5 click" (click)="editarUsuario(usuario.id)"></i>
+                        <i class="pi pi-trash color-red click" (click)="excluirUsuario(usuario.id)"></i>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
 </div>
+
+<p-confirmDialog #dialog>
+    <p-footer>
+        <button class="p-button-success" type="button" pButton icon="pi pi-check" label="Sim" (click)="dialog.accept()"></button>
+        <button class="p-button-danger" type="button" pButton icon="pi pi-times" label="Não" (click)="dialog.reject()"></button>
+    </p-footer>
+</p-confirmDialog>

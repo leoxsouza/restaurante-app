@@ -1,5 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
+* {
+  -webkit-box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .margin-y-10 {
   margin: 10px 0 10px 0;
 }
@@ -17,4 +26,32 @@
   text-align: center;
   position: absolute;
   top: 20%;
+}
+
+.margin-20 {
+  margin: 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.margin-right-30 {
+  margin-right: 30px;
+}
+
+.color-red {
+  color: rgba(250, 7, 7, 0.699);
+}
+
+.click {
+  cursor: pointer;
+}
+
+.color-blue {
+  color: rgb(0, 89, 253);
+}
+
+.margin-right-5 {
+  margin-right: 5px;
 }
