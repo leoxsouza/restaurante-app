@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/login/usuario.model';
 import { UsuarioService } from 'src/app/service/usuario.service';
+import { finalize } from 'rxjs/operators';
+import { MensagemUtil } from 'src/app/utils/mensagem.util';
 
 @Component({
   selector: 'app-usuario',
@@ -15,7 +17,7 @@ export class UsuarioComponent implements OnInit {
 
   usuarios: Observable<Usuario[]>;
 
-  usuarioList: Usuario[] = [{login: 'leo', senha: '123', id: 1}, {id: 2, login: 'brenda', senha: '123'}];
+  usuarioList: Usuario[] = [{id: 1, login: 'leo', nome: 'Leonardo', senha: '123'}];
 
   @BlockUI() blockUI: NgBlockUI;
 
@@ -23,10 +25,18 @@ export class UsuarioComponent implements OnInit {
     private usuarioService: UsuarioService,
     private router: Router,
     private confirmationService: ConfirmationService,
+    private messageService: MessageService,
     ) { }
 
   ngOnInit(): void {
-    this.usuarioService.getUsuarios().subscribe(data => console.log(data));
+    this.listarUsuarios();
+  }
+
+  listarUsuarios() {
+    this.blockUI.start(MensagemUtil.BLOCKUI_CARREGANDO);
+    this.usuarioService.getUsuarios()
+      .pipe(finalize(() => this.blockUI.stop()))
+      .subscribe(data => this.usuarioList = data);
   }
 
   visualizarUsuario(idUsuario) {
@@ -43,16 +53,13 @@ export class UsuarioComponent implements OnInit {
       header: 'Confirmação',
       icon: 'fa ui-icon-warning',
       accept: () => {
-        this.blockUI.start("Excluindo");
-        
-        setTimeout(() => {
-          this.blockUI.stop(); // Stop blocking
-        }, 2000);
-        //this.service.inativar(this.linhaSelecionada.id).pipe(finalize(() => this.blockUI.stop()))
-          //.subscribe(() => {
-           // this.pageNotificationService.addSuccessMsg('NCM desativada com sucesso.');
-           // this.getAllNcm();
-         // });
+        this.blockUI.start(MensagemUtil.BLOCKUI_EXCLUINDO);
+
+        this.usuarioService.excluirUsuario(idUsuario).pipe(finalize(() => this.blockUI.stop()))
+          .subscribe(() => {
+            this.messageService.add({severity:'success', summary: MensagemUtil.SUCESSO, detail: `Usuário ${MensagemUtil.EXCLUIDO}`});
+           this.listarUsuarios();
+         });
       }
     });
   }

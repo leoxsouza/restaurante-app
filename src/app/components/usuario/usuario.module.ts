@@ -7,7 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { UsuarioComponent } from './usuario.component';
 import { UsuarioFormComponent } from './usuario-form/usuario-form.component';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 let ENTITY_STATES = [
@@ -23,7 +23,7 @@ let ENTITY_STATES = [
     FormsModule,
     BrowserModule,
   ],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService, MessageService],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class UsuarioModule { }

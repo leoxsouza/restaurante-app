@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Usuario } from 'src/app/model/usuario';
+import { UsuarioService } from 'src/app/service/usuario.service';
+import { MensagemUtil } from 'src/app/utils/mensagem.util';
+import { finalize } from 'rxjs/operators';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-usuario-form',
@@ -10,8 +16,15 @@ export class UsuarioFormComponent implements OnInit {
 
   acao: string;
 
+  usuario: Usuario = new Usuario();
+
+  @BlockUI() blockUI: NgBlockUI;
+
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private usuarioService: UsuarioService,
+    private router: Router,
+    private messageService: MessageService,
   ) { }
 
   ngOnInit(): void {
@@ -21,9 +34,28 @@ export class UsuarioFormComponent implements OnInit {
   verificarParametros() {
     this.route.params.subscribe((params) => {
 
+      if (params['id']) {
+        this.carregarUsuario(params['id']);
+      }
+
       this.acao = params['acao'];
     });
   }
 
+  carregarUsuario(id) {
+    this.blockUI.start(MensagemUtil.BLOCKUI_CARREGANDO);
+    this.usuarioService.findOne(id).pipe(finalize(() => this.blockUI.stop()))
+    .subscribe(usuario => this.usuario = usuario);
+  }
+
+  salvarUsuario() {
+    this.blockUI.start( MensagemUtil.BLOCKUI_SALVANDO );
+    this.usuarioService.salvar(this.usuario).pipe(finalize(() => this.blockUI.stop()))
+    .subscribe( () => {
+      this.router.navigate( [ '/usuario' ] );
+      this.messageService.add({severity:'success', summary: MensagemUtil.SUCESSO, detail: `Usuário ${MensagemUtil.SALVO}`});
+    });
+
+  }
 
 }

@@ -10,15 +10,15 @@
     <div class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col-12">
             <label for="nome">Nome</label>
-            <input id="nome" type="text" pInputText> 
+            <input id="nome" type="text" pInputText [(ngModel)]="usuario.nome">
         </div>
         <div class="p-field p-col-6">
             <label for="login">Login</label>
-            <input id="login" type="text" pInputText> 
+            <input id="login" type="text" pInputText [(ngModel)]="usuario.login">
         </div>
         <div class="p-field p-col-6">
             <label for="senha">Senha</label>
-            <input id="senha" type="password" pInputText> 
+            <input id="senha" type="password" pInputText [(ngModel)]="usuario.senha">
         </div>
 
         <div class="p-col-6 p-lg-3">
@@ -27,7 +27,7 @@
 
         </div>
         <div class="p-col-6 p-lg-3">
-            <button pButton label="Salvar" class="ui-button p-button-success" icon="pi pi-save">
+            <button pButton label="Salvar" class="ui-button p-button-success" icon="pi pi-save" (click)="salvarUsuario()">
             </button>
 
         </div>

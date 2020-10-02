@@ -5,13 +5,13 @@
     </div>
 
     <div class="p-grid">
-        <button pButton label="Pesquisar" class="ui-button p-col-5 p-lg-3" icon="pi pi-search">
+        <button pButton label="Pesquisar" class="ui-button p-col-5 p-lg-3 p-button-info" icon="pi pi-search">
         </button>
 
         <div class="p-col-2"></div>
 
 
-        <button class="p-col-5 p-lg-3" pButton label="Cadastrar" icon="pi pi-user-plus"
+        <button class="p-col-5 p-lg-3 p-button-success" pButton label="Cadastrar" icon="pi pi-user-plus"
             [routerLink]="['/usuario', 'cadastrar']">
         </button>
     </div>
@@ -28,10 +28,10 @@
             </ng-template>
             <ng-template pTemplate="body" let-usuario>
                 <tr>
+                    <td>{{usuario.nome}}</td>
                     <td>{{usuario.login}}</td>
-                    <td>{{usuario.senha}}</td>
                     <td>
-                        <i class="pi pi-eye margin-right-5 click color-blue" (click)="visualizarUsuario(usuario.id)"></i>
+                        <!-- <i class="pi pi-eye margin-right-5 click color-blue" (click)="visualizarUsuario(usuario.id)"></i> -->
                         <i class="pi pi-user-edit margin-right-5 click" (click)="editarUsuario(usuario.id)"></i>
                         <i class="pi pi-trash color-red click" (click)="excluirUsuario(usuario.id)"></i>
                     </td>
