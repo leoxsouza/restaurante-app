@@ -24,6 +24,6 @@ export class UsuarioService {
   }
 
   excluirUsuario( id: number ) {
-    return this.http.delete(`${AppConstants.baseUrl}${id}`);
+    return this.http.get(`${AppConstants.baseUrl}deletar/${id}`);
   }
 }

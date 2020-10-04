@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
           mostrar => this.mostrarMenu = mostrar
       );
 
-      if (localStorage.getItem('token') == null) {
+      if (sessionStorage.getItem('token') == null) {
         this.router.navigate(['login']);
       }
     }

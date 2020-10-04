@@ -17,10 +17,11 @@ export class AuthService {
 
   fazerLogin(usuario: Usuario) {
 
-    this.http.post(AppConstants.baseLogin, JSON.stringify(usuario)).subscribe(data => {
-      let token = JSON.parse(JSON.stringify(data)).Authorization.split(' ')[1];
+    this.http.post<any>(AppConstants.baseLogin, usuario).subscribe(data => {
 
-      localStorage.setItem("token", token);
+      let token = data.token;
+
+      sessionStorage.setItem("token", token);
       this.usuarioAutenticado = true;
 
       this.mostrarMenuEmitter.emit(true);

@@ -33,7 +33,7 @@ export class AppMenuComponent implements OnInit {
 }
 
     public sair() {
-        localStorage.clear();
+        sessionStorage.clear();
         this.mostrarMenuEmitter.emit(false);
         this.router.navigate(['login']);
     }

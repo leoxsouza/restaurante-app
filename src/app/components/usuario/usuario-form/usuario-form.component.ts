@@ -6,6 +6,7 @@ import { MensagemUtil } from 'src/app/utils/mensagem.util';
 import { finalize } from 'rxjs/operators';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { MessageService } from 'primeng/api';
+import { AcaoEnum } from 'src/app/utils/acao.enum';
 
 @Component({
   selector: 'app-usuario-form',
@@ -15,6 +16,7 @@ import { MessageService } from 'primeng/api';
 export class UsuarioFormComponent implements OnInit {
 
   acao: string;
+  acoesEnum = AcaoEnum;
 
   usuario: Usuario = new Usuario();
 
@@ -56,6 +58,10 @@ export class UsuarioFormComponent implements OnInit {
       this.messageService.add({severity:'success', summary: MensagemUtil.SUCESSO, detail: `Usuário ${MensagemUtil.SALVO}`});
     });
 
+  }
+
+  disableBtnSalvar() {
+    return !this.usuario.login || !this.usuario.nome || !this.usuario.senha;
   }
 
 }

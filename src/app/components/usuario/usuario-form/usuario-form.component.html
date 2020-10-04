@@ -1,9 +1,9 @@
 <div class="margin-20">
 
     <div>
-        <h1 *ngIf="acao == 'visualizar'">Visualizar Usuário</h1>
-        <h1 *ngIf="acao == 'editar'">Editar Usuário</h1>
-        <h1 *ngIf="acao == 'cadastrar'">Cadastrar Usuário</h1>
+        <h1 *ngIf="acao == acoesEnum.VISUALIZAR">Visualizar Usuário</h1>
+        <h1 *ngIf="acao == acoesEnum.EDITAR">Editar Usuário</h1>
+        <h1 *ngIf="acao == acoesEnum.CADASTRAR">Cadastrar Usuário</h1>
 
     </div>
 
@@ -14,10 +14,10 @@
         </div>
         <div class="p-field p-col-6">
             <label for="login">Login</label>
-            <input id="login" type="text" pInputText [(ngModel)]="usuario.login">
+            <input id="login" type="text" pInputText [(ngModel)]="usuario.login" [disabled]="acao == acoesEnum.EDITAR">
         </div>
         <div class="p-field p-col-6">
-            <label for="senha">Senha</label>
+            <label for="senha">{{acao == acoesEnum.EDITAR ? 'Nova senha' : 'Senha'}}</label>
             <input id="senha" type="password" pInputText [(ngModel)]="usuario.senha">
         </div>
 
@@ -27,7 +27,8 @@
 
         </div>
         <div class="p-col-6 p-lg-3">
-            <button pButton label="Salvar" class="ui-button p-button-success" icon="pi pi-save" (click)="salvarUsuario()">
+            <button pButton label="Salvar" class="ui-button p-button-success" icon="pi pi-save" 
+                (click)="salvarUsuario()" [disabled]="disableBtnSalvar()">
             </button>
 
         </div>
