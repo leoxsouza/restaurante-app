@@ -4,4 +4,5 @@ export class Usuario {
     login: string;
     nome: string;
     senha: string;
+    role: { id: string, descricaoRole: string };
 }

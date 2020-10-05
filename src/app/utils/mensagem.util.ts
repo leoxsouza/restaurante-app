@@ -11,8 +11,11 @@ export class MensagemUtil {
     public static ERRO_RELATORIO = 'Erro ao exportar arquivo';
 
     public static SUCESSO = 'Sucesso';
+    public static ERRO = 'Erro';
 
     public static EXCLUIDO = 'excluído com sucesso!';
     public static SALVO = 'salvo com sucesso!';
+
+    public static ERRO_LOGIN = 'Erro ao fazer login, tente novamente!'
 
 }

@@ -20,6 +20,12 @@
             <label for="senha">{{acao == acoesEnum.EDITAR ? 'Nova senha' : 'Senha'}}</label>
             <input id="senha" type="password" pInputText [(ngModel)]="usuario.senha">
         </div>
+        
+        <div class="p-field p-col-6">
+            <label for="role">Role</label>
+            <p-dropdown name="role" [options]="roles" [(ngModel)]="usuario.role" optionLabel="descricaoRole"></p-dropdown>
+        </div>
+        <div class="p-col-6"></div>
 
         <div class="p-col-6 p-lg-3">
             <button pButton label="Voltar" class="ui-button p-button-secondary" icon="pi pi-chevron-left" routerLink="/usuario">

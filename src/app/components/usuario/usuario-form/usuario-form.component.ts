@@ -20,6 +20,8 @@ export class UsuarioFormComponent implements OnInit {
 
   usuario: Usuario = new Usuario();
 
+  roles = [{id: null, descricaoRole: "Selecione uma Role"}, {id:1, descricaoRole: "ADMIN"}, {id: 2, descricaoRole: "CLIENTE"}]
+
   @BlockUI() blockUI: NgBlockUI;
 
   constructor(
@@ -56,7 +58,7 @@ export class UsuarioFormComponent implements OnInit {
     .subscribe( () => {
       this.router.navigate( [ '/usuario' ] );
       this.messageService.add({severity:'success', summary: MensagemUtil.SUCESSO, detail: `Usuário ${MensagemUtil.SALVO}`});
-    });
+    }, error => console.log(error));
 
   }
 

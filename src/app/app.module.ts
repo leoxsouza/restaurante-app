@@ -15,6 +15,7 @@ import { HttpInterceptorModule } from './service/header-interceptor.service';
 import { UsuarioModule } from './components/usuario/usuario.module';
 import { AuthGuard } from './guards/auth.guard';
 import { BlockUIModule } from 'ng-block-ui';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { BlockUIModule } from 'ng-block-ui';
     BlockUIModule.forRoot(),
 
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
