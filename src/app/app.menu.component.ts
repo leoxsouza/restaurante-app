@@ -29,6 +29,11 @@ export class AppMenuComponent implements OnInit {
             routerLink: 'usuario'
 
         },
+        {
+            label: 'Dívidas de Clientes',
+            icon: 'pi pi-money-bill',
+            routerLink: 'divida-cliente'
+        }
     ];
 }
 

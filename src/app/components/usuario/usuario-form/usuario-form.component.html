@@ -8,9 +8,13 @@
     </div>
 
     <div class="p-fluid p-formgrid p-grid">
-        <div class="p-field p-col-12">
+        <div class="p-field p-col-6">
             <label for="nome">Nome</label>
-            <input id="nome" type="text" pInputText [(ngModel)]="usuario.nome">
+            <input id="nome" type="text" pInputText [(ngModel)]="usuario.pessoa.nome">
+        </div>
+        <div class="p-field p-col-6">
+            <span>CPF</span>
+            <p-inputMask mask="999.999.999-99" [(ngModel)]="usuario.pessoa.cpf" placeholder="999.999.999-99" unmask="true"></p-inputMask>
         </div>
         <div class="p-field p-col-6">
             <label for="login">Login</label>
@@ -21,11 +25,30 @@
             <input id="senha" type="password" pInputText [(ngModel)]="usuario.senha">
         </div>
         
-        <div class="p-field p-col-6">
-            <label for="role">Role</label>
-            <p-dropdown name="role" [options]="roles" [(ngModel)]="usuario.role" optionLabel="descricaoRole"></p-dropdown>
+        <div class="p-field p-col-6 p-lg-3">
+            <div class="p-field-radiobutton">
+                <p-radioButton name="tipoPessoa" [value]="tipoPessoaEnum.PF" [(ngModel)]="usuario.pessoa.tipoPessoa" (onClick)="verificarPessoa()"
+                    inputId="tipoPessoa1"></p-radioButton>
+                <label for="tipoPessoa1">Cliente</label>
+            </div>
         </div>
-        <div class="p-col-6"></div>
+
+        <div class="p-field p-col-6 p-lg-3">
+            <div class="p-field-radiobutton">
+                <p-radioButton name="tipoPessoa" [value]="tipoPessoaEnum.PJ" [(ngModel)]="usuario.pessoa.tipoPessoa" (onClick)="verificarPessoa()"
+                    inputId="tipoPessoa2"></p-radioButton>
+                <label for="tipoPessoa2">Empresa</label>
+            </div>
+        </div>
+        <div class="p-col-12 p-lg-6"></div>
+
+        <div class="p-field p-col-12 p-lg-6" *ngIf="isPj()">
+            <label>Empresa</label>
+            <p-dropdown [options]="empresas" [(ngModel)]="usuario.pessoa.empresa"
+                placeholder="Selecione uma empresa"></p-dropdown>
+        </div>
+
+        <div class="p-col-12 p-lg-6" *ngIf="isPj()"></div>
 
         <div class="p-col-6 p-lg-3">
             <button pButton label="Voltar" class="ui-button p-button-secondary" icon="pi pi-chevron-left" routerLink="/usuario">

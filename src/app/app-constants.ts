@@ -12,4 +12,8 @@ export class AppConstants {
     return this.baseServidor + "api/usuario/"
   }
 
+  public static get apiUrl(): string {
+    return this.baseServidor + "api"
+  }
+
 }

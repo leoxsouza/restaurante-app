@@ -5,8 +5,10 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 import { MensagemUtil } from 'src/app/utils/mensagem.util';
 import { finalize } from 'rxjs/operators';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { MessageService } from 'primeng/api';
+import { MessageService, SelectItem } from 'primeng/api';
 import { AcaoEnum } from 'src/app/utils/acao.enum';
+import { EmpresaService } from 'src/app/service/empresa.service';
+import { TipoPessoaEnum } from 'src/app/model/tipo-pessoa.enum';
 
 @Component({
   selector: 'app-usuario-form',
@@ -17,10 +19,13 @@ export class UsuarioFormComponent implements OnInit {
 
   acao: string;
   acoesEnum = AcaoEnum;
+  tipoPessoaEnum = TipoPessoaEnum;
 
   usuario: Usuario = new Usuario();
 
   roles = [{id: null, descricaoRole: "Selecione uma Role"}, {id:1, descricaoRole: "ADMIN"}, {id: 2, descricaoRole: "CLIENTE"}]
+
+  empresas: SelectItem[] = [];
 
   @BlockUI() blockUI: NgBlockUI;
 
@@ -29,10 +34,12 @@ export class UsuarioFormComponent implements OnInit {
     private usuarioService: UsuarioService,
     private router: Router,
     private messageService: MessageService,
+    private empresaService: EmpresaService,
   ) { }
 
   ngOnInit(): void {
     this.verificarParametros();
+    this.getDropdown();
   }
 
   verificarParametros() {
@@ -44,6 +51,12 @@ export class UsuarioFormComponent implements OnInit {
 
       this.acao = params['acao'];
     });
+  }
+
+  getDropdown() {
+    this.blockUI.start(MensagemUtil.BLOCKUI_CARREGANDO);
+    this.empresaService.getEmpresasDropdown().pipe(finalize(() => this.blockUI.stop()))
+      .subscribe(empresasDropdown => this.empresas = empresasDropdown);
   }
 
   carregarUsuario(id) {
@@ -63,7 +76,18 @@ export class UsuarioFormComponent implements OnInit {
   }
 
   disableBtnSalvar() {
-    return !this.usuario.login || !this.usuario.nome || !this.usuario.senha;
+    //TODO falta tipopessoa
+    return !this.usuario.login || !this.usuario.pessoa.nome || !this.usuario.senha;
+  }
+
+  isPj() {
+    return this.usuario.pessoa.tipoPessoa == this.tipoPessoaEnum.PJ;
+  }
+
+  verificarPessoa() {
+    if (!this.isPj()) {
+      this.usuario.pessoa.empresa = undefined;
+    }
   }
 
 }

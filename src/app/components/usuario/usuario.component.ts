@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
-import { Usuario } from 'src/app/login/usuario.model';
 import { UsuarioService } from 'src/app/service/usuario.service';
 import { finalize } from 'rxjs/operators';
 import { MensagemUtil } from 'src/app/utils/mensagem.util';
+import { Usuario } from 'src/app/model/usuario';
 
 @Component({
   selector: 'app-usuario',
@@ -15,9 +14,7 @@ import { MensagemUtil } from 'src/app/utils/mensagem.util';
 })
 export class UsuarioComponent implements OnInit {
 
-  usuarios: Observable<Usuario[]>;
-
-  usuarioList: Usuario[] = [{id: 1, login: 'leo', nome: 'Leonardo', senha: '123'}];
+  usuarioList: Usuario[] = [];
 
   @BlockUI() blockUI: NgBlockUI;
 
