@@ -1,23 +1,24 @@
 <div class="margin-20">
 
     <div>
-        <h1 class="text-center">Listar Usuários</h1>
+        <h1 class="text-center">Listar Dívidas de Clientes</h1>
     </div>
 
     <div class="p-grid">
-        <button pButton label="Pesquisar" class="ui-button p-col-5 p-lg-3 p-button-info" icon="pi pi-search" (click)="listarUsuarios()">
+        <button pButton label="Pesquisar" class="ui-button p-col-5 p-lg-3 p-button-info" icon="pi pi-search" >
         </button>
 
         <div class="p-col-2"></div>
 
 
-        <button class="p-col-5 p-lg-3 p-button-success" pButton label="Cadastrar" icon="pi pi-user-plus"
-            [routerLink]="['/usuario', 'cadastrar']">
+        <button class="p-col-5 p-lg-3 p-button-success" pButton label="Cadastrar" icon="pi pi-plus"
+            [routerLink]="['/divida-cliente', 'cadastrar']">
         </button>
     </div>
 
     <div class="card margin-y-10">
-        <p-table [value]="usuarioList" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]" [responsive]="true">
+        <!-- <p-table [value]="usuarioList" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]" [responsive]="true"
+            styleClass="strip">
             <ng-template pTemplate="header">
                 <tr>
                     <th>Nome</th>
@@ -35,7 +36,7 @@
                     </td>
                 </tr>
             </ng-template>
-        </p-table>
+        </p-table> -->
     </div>
 
 </div>

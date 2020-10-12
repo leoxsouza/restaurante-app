@@ -52,3 +52,7 @@ body {
 .margin-right-5 {
   margin-right: 5px;
 }
+
+tr:nth-child(odd) {
+  background-color: rgb(197, 193, 193) !important;
+}

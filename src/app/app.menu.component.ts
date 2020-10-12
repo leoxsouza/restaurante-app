@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api/menuitem';
+import { AuthService } from './login/auth.service';
 
 @Component({
     selector: 'app-menu',
@@ -17,9 +18,7 @@ export class AppMenuComponent implements OnInit {
 
   items: MenuItem[];
 
-  mostrarMenuEmitter = new EventEmitter<boolean>();
-
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.items = [
@@ -38,8 +37,8 @@ export class AppMenuComponent implements OnInit {
 }
 
     public sair() {
-        sessionStorage.clear();
-        this.mostrarMenuEmitter.emit(false);
+        localStorage.clear();
+        this.authService.usuarioAutenticado.emit(false);
         this.router.navigate(['login']);
     }
 

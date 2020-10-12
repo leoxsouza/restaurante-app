@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuItem } from 'primeng/api/menuitem';
 import { AuthService } from './login/auth.service';
 
 @Component({
@@ -14,15 +13,14 @@ export class AppComponent implements OnInit {
   mostrarMenu: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {
-
+    this.mostrarMenu = this.authService.usuarioEstaAutenticado();
   }
 
   ngOnInit() {
-      this.authService.mostrarMenuEmitter.subscribe(
-          mostrar => this.mostrarMenu = mostrar
-      );
 
-      if (sessionStorage.getItem('token') == null) {
+      this.authService.usuarioAutenticado.subscribe(autenticado => this.mostrarMenu = autenticado);
+
+      if (localStorage.getItem('token') == null) {
         this.router.navigate(['login']);
       }
     }

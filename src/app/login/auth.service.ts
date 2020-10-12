@@ -11,12 +11,13 @@ import { MensagemUtil } from '../utils/mensagem.util';
 })
 export class AuthService {
 
-  private usuarioAutenticado: boolean = false;
 
-  mostrarMenuEmitter = new EventEmitter<boolean>();
+  usuarioAutenticado = new EventEmitter<boolean>();
 
   constructor(private router: Router, private http: HttpClient,
-    private messageService: MessageService,) { }
+    private messageService: MessageService,) {
+      this.usuarioAutenticado.emit(this.usuarioEstaAutenticado());
+     }
 
   fazerLogin(usuario: Usuario) {
 
@@ -24,21 +25,24 @@ export class AuthService {
 
       let token = data.token;
 
-      sessionStorage.setItem("token", token);
-      this.usuarioAutenticado = true;
+      localStorage.setItem("token", token);
 
-      this.mostrarMenuEmitter.emit(true);
+      this.usuarioAutenticado.emit(true);
 
       this.router.navigate(['/']);
 
     }, error => {
       this.messageService.add({severity:'error', summary: MensagemUtil.ERRO, detail: MensagemUtil.ERRO_LOGIN});
-      this.usuarioAutenticado = false;
-      this.mostrarMenuEmitter.emit(false);
+      this.usuarioAutenticado.emit(false);
     })
   }
 
   usuarioEstaAutenticado() {
-    return this.usuarioAutenticado;
+    if (localStorage.getItem('token') !== null &&
+      localStorage.getItem('token').toString().trim() !== null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

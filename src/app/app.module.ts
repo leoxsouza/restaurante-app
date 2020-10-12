@@ -16,6 +16,7 @@ import { UsuarioModule } from './components/usuario/usuario.module';
 import { AuthGuard } from './guards/auth.guard';
 import { BlockUIModule } from 'ng-block-ui';
 import { MessageService } from 'primeng/api';
+import { DividaClienteModule } from './components/divida-cliente/divida-cliente.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MessageService } from 'primeng/api';
     HttpInterceptorModule,
     UsuarioModule,
     BlockUIModule.forRoot(),
+    DividaClienteModule
 
   ],
   providers: [AuthService, AuthGuard, MessageService],
