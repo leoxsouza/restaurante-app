@@ -56,3 +56,11 @@ body {
 tr:nth-child(odd) {
   background-color: rgb(197, 193, 193) !important;
 }
+
+.color-green {
+  color: green;
+}
+
+.margin-left-15 {
+  margin-left: 15px;
+}

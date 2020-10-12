@@ -26,4 +26,8 @@ export class UsuarioService {
   excluirUsuario( id: number ) {
     return this.http.get(`${AppConstants.baseUrl}deletar/${id}`);
   }
+
+  getClientesDropdown(): Observable<any> {
+    return this.http.get<any>(`${AppConstants.baseUrl}clientes/dropdown`);
+  }
 }

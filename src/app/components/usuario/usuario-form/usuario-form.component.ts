@@ -77,7 +77,7 @@ export class UsuarioFormComponent implements OnInit {
 
   disableBtnSalvar() {
     //TODO falta tipopessoa
-    return !this.usuario.login || !this.usuario.pessoa.nome || !this.usuario.senha;
+    return !this.usuario.login || !this.usuario.pessoa.nome || !this.usuario.senha || !this.usuario.pessoa.tipoPessoa;
   }
 
   isPj() {
