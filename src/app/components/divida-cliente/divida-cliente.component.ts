@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { MessageService } from 'primeng/api';
 import { finalize } from 'rxjs/operators';
 import { DividaCliente } from 'src/app/model/divida-cliente';
 import { QuitarDivida } from 'src/app/model/quitar-divida';
@@ -23,7 +24,8 @@ export class DividaClienteComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   constructor(
-    private dividaService: DividaClienteService
+    private dividaService: DividaClienteService,
+    private messageService: MessageService,
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +42,6 @@ export class DividaClienteComponent implements OnInit {
   quitarDivida(dividaSelecionada: DividaCliente) {
     this.dividaSelecionada = dividaSelecionada;
     this.showModalDialog();
-    console.log(this.dividaSelecionada);
   }
 
   showModalDialog() {
@@ -54,20 +55,39 @@ export class DividaClienteComponent implements OnInit {
   }
 
   confirmarPagamento() {
-    //TODO TRAZER O ID DO CLIENTE NA LSITAGEM TBM
-    // this.dividaQuitada.idUsuarioCliente = this.dividaSelecionada.idUsuarioCliente;
+
+    this.dividaQuitada.idUsuarioCliente = this.dividaSelecionada.idCliente;
 
     if (this.quitarParte) {
+
+      if (this.parteQuitada > this.dividaSelecionada.total) {
+        this.messageService.add({severity:'error', summary: MensagemUtil.ERRO, detail: `O valor informado é maior que a dívida.`});
+        return;
+      }
+      
       this.dividaQuitada.valorQuitado = this.parteQuitada;
+
+
     } else {
       this.dividaQuitada.valorQuitado = this.dividaSelecionada.total;
     }
 
-    console.log(this.dividaQuitada);
+    this.persistirRegistro();
+    
   }
 
   disableBtnQuitar() {
     return this.quitarParte && !this.parteQuitada;
+  }
+
+  persistirRegistro() {
+    this.blockUI.start( MensagemUtil.BLOCKUI_SALVANDO );
+    this.dividaService.quitarDivida(this.dividaQuitada).pipe(finalize(() => this.blockUI.stop()))
+    .subscribe( () => {
+      this.listarDividas();
+      this.closeDialog();
+      this.messageService.add({severity:'success', summary: MensagemUtil.SUCESSO, detail: `Dívida quitada com sucesso!`});
+    });
   }
 
 }
