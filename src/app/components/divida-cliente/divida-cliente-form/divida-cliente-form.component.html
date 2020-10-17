@@ -8,7 +8,7 @@
     <div class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col-12 p-lg-6">
             <label>Cliente *</label>
-            <p-dropdown [options]="clientes" [(ngModel)]="compraCliente.idUsuarioCliente" [filter]="true" required
+            <p-dropdown [options]="clientes" [(ngModel)]="compraCliente.idUsuarioCliente" [filter]="true" required emptyFilterMessage="Nenhum cliente encontrado"
                 placeholder="Selecione um cliente"></p-dropdown>
         </div>
         <div class="p-field p-col-12 p-lg-6">
@@ -23,7 +23,7 @@
 
         </div>
         <div class="p-col-6 p-lg-3">
-            <button pButton label="Salvar" class="ui-button p-button-success" icon="pi pi-save" 
+            <button pButton label="Salvar" class="ui-button p-button-success" icon="pi pi-save"
                 (click)="salvarCompra()" [disabled]="disableBtnSalvar()">
             </button>
 
