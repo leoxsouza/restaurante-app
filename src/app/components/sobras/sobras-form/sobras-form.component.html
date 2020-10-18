@@ -1,0 +1,32 @@
+<div class="margin-20">
+
+    <div>
+        <h1>Cadastrar Sobra</h1>
+
+    </div>
+
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-lg-6">
+            <label>Produto *</label>
+            <p-dropdown [options]="produtos" [(ngModel)]="sobra.idProduto" [filter]="true" required emptyFilterMessage="Nenhum produto encontrado"
+                placeholder="Selecione um produto"></p-dropdown>
+        </div>
+        <div class="p-field p-col-12 p-lg-6">
+            <label for="qtdPeso">Quantidade (Kg) *</label>
+            <input required type="text" currencyMask [(ngModel)]="sobra.qtdPeso" pInputText [options]="{prefix: '', suffix: ' Kg'}"
+                      name="qtdPeso" maxlength="19" />
+        </div>
+
+        <div class="p-col-6 p-lg-3">
+            <button pButton label="Voltar" class="ui-button p-button-secondary" icon="pi pi-chevron-left" routerLink="/divida-cliente">
+            </button>
+
+        </div>
+        <div class="p-col-6 p-lg-3">
+            <button pButton label="Salvar" class="ui-button p-button-success" icon="pi pi-save"
+                (click)="salvarSobra()" [disabled]="disableBtnSalvar()">
+            </button>
+
+        </div>
+    </div>
+</div>

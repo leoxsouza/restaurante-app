@@ -3,4 +3,5 @@ export class Sobras {
     qtdPeso: number;
     qtdUnidade: number;
     dataSobra: Date;
+    idProduto: number;
 }

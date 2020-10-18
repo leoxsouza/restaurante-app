@@ -20,8 +20,6 @@ export class DividaClienteFormComponent implements OnInit {
 
   clientes: SelectItem[] = [];
 
-
-
   @BlockUI() blockUI: NgBlockUI;
 
   constructor(

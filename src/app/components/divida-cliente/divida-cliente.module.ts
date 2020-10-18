@@ -33,11 +33,6 @@ registerLocaleData(localePt, 'pt');
     ConfirmationService, 
     MessageService, 
     { provide: CURRENCY_MASK_CONFIG, useValue: customCurrencyMaskConfig },
-    { provide: LOCALE_ID, useValue: 'pt-BR'},
-    {
-      provide:  DEFAULT_CURRENCY_CODE,
-      useValue: 'BRL'
-  },
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
