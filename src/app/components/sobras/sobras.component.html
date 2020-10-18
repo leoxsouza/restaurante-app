@@ -1,0 +1,41 @@
+<div class="margin-20">
+
+    <div>
+        <h1 class="text-center">Listagem de Sobras</h1>
+    </div>
+
+
+    <div class="p-grid">
+        <button class="p-col-12 p-lg-6 p-button-success" pButton label="Cadastrar" icon="pi pi-plus"
+            [routerLink]="['/sobra-produto', 'cadastrar']">
+        </button>
+    </div>
+    <div class="card margin-y-10">
+        <p-table #dt [value]="sobras" [paginator]="true" [columns]="cols"
+            [rows]="10" [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-responsive-demo">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                        {{col.header}} <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td *ngFor="let col of columns">
+                        <span class="p-column-title">{{col.header}}</span>
+                        {{rowData[col.field]}}
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                  <td [attr.colspan]="4">
+                      Nenhum registro encontrado.
+                  </td>
+              </tr>
+          </ng-template>
+        </p-table>
+    </div>
+
+</div>

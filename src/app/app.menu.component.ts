@@ -38,6 +38,12 @@ export class AppMenuComponent implements OnInit {
                 icon: 'pi pi-money-bill',
                 routerLink: 'divida-cliente'
             });
+
+            this.items.push({
+                label: 'Sobras',
+                icon: 'pi pi-minus',
+                routerLink: 'sobras'
+            });
         }
 
         if (this.authService.hasHole([RolesEnum.CLIENTE]) ) {

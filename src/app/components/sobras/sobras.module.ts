@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MinhasDividasComponent } from './minhas-dividas.component';
-import { PRIMENG_IMPORTS } from 'src/app/primeng-imports';
+import { SobrasComponent } from './sobras.component';
 import { RouterModule } from '@angular/router';
-import { MinhasDividasRoute } from './minhas-dividas.route';
+import { PRIMENG_IMPORTS } from 'src/app/primeng-imports';
+import { SobrasRoute } from './sobras.route';
 
 
 let ENTITY_STATES = [
-  ...MinhasDividasRoute
+  ...SobrasRoute
 ];
 
 @NgModule({
-  declarations: [MinhasDividasComponent],
+  declarations: [SobrasComponent],
   imports: [
     CommonModule,
     RouterModule.forRoot( ENTITY_STATES, { useHash: true } ),
     PRIMENG_IMPORTS,
   ]
 })
-export class MinhasDividasModule { }
+export class SobrasModule { }
