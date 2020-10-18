@@ -71,12 +71,14 @@ export class UsuarioFormComponent implements OnInit {
     .subscribe( () => {
       this.router.navigate( [ '/usuario' ] );
       this.messageService.add({severity:'success', summary: MensagemUtil.SUCESSO, detail: `Usuário ${MensagemUtil.SALVO}`});
-    }, error => console.log(error));
+    }, error => this.messageService.add({severity:'error', summary: MensagemUtil.SUCESSO, detail: `Erro ao cadastrar usuário`}));
 
   }
 
   disableBtnSalvar() {
-    //TODO falta tipopessoa
+    if (this.isPj()) {
+      return !this.usuario.login || !this.usuario.pessoa.nome || !this.usuario.senha || !this.usuario.pessoa.tipoPessoa || !this.usuario.pessoa.empresa;
+    }
     return !this.usuario.login || !this.usuario.pessoa.nome || !this.usuario.senha || !this.usuario.pessoa.tipoPessoa;
   }
 

@@ -17,12 +17,13 @@ import { AuthGuard } from './guards/auth.guard';
 import { BlockUIModule } from 'ng-block-ui';
 import { MessageService } from 'primeng/api';
 import { DividaClienteModule } from './components/divida-cliente/divida-cliente.module';
+import { MinhasDividasModule } from './components/minhas-dividas/minhas-dividas.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppMenuComponent,
-    LoginComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +36,8 @@ import { DividaClienteModule } from './components/divida-cliente/divida-cliente.
     HttpInterceptorModule,
     UsuarioModule,
     BlockUIModule.forRoot(),
-    DividaClienteModule
+    DividaClienteModule,
+    MinhasDividasModule,
 
   ],
   providers: [AuthService, AuthGuard, MessageService],

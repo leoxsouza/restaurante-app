@@ -6,6 +6,8 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 import { finalize } from 'rxjs/operators';
 import { MensagemUtil } from 'src/app/utils/mensagem.util';
 import { Usuario } from 'src/app/model/usuario';
+import { AuthService } from 'src/app/login/auth.service';
+import { RolesEnum } from 'src/app/utils/roles.enum';
 
 @Component({
   selector: 'app-usuario',
@@ -23,6 +25,7 @@ export class UsuarioComponent implements OnInit {
     private router: Router,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
+    private authServie: AuthService
     ) { }
 
   ngOnInit(): void {
@@ -56,9 +59,13 @@ export class UsuarioComponent implements OnInit {
           .subscribe(() => {
             this.messageService.add({severity:'success', summary: MensagemUtil.SUCESSO, detail: `Usuário ${MensagemUtil.EXCLUIDO}`});
            this.listarUsuarios();
-         });
+         }, error => this.messageService.add({severity:'error', summary: MensagemUtil.ERRO, detail: 'Exclusão não permitida'}));
       }
     });
+  }
+
+  hasRoleAdm() {
+    return this.authServie.hasHole([RolesEnum.ADMIN])
   }
 
 }

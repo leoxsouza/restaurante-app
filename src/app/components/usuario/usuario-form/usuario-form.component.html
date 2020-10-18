@@ -16,16 +16,16 @@
             <span>CPF</span>
             <p-inputMask mask="999.999.999-99" [(ngModel)]="usuario.pessoa.cpf" placeholder="999.999.999-99" unmask="true"></p-inputMask>
         </div>
-        <div class="p-field p-col-6">
+        <div class="p-field p-col-6" *ngIf="acao == acoesEnum.CADASTRAR">
             <label for="login">Login</label>
             <input id="login" type="text" pInputText [(ngModel)]="usuario.login" [disabled]="acao == acoesEnum.EDITAR">
         </div>
-        <div class="p-field p-col-6">
+        <div class="p-field p-col-6" *ngIf="acao == acoesEnum.CADASTRAR">
             <label for="senha">{{acao == acoesEnum.EDITAR ? 'Nova senha' : 'Senha'}}</label>
             <input id="senha" type="password" pInputText [(ngModel)]="usuario.senha">
         </div>
         
-        <div class="p-field p-col-6 p-lg-3">
+        <div class="p-field p-col-6 p-lg-3" *ngIf="acao == acoesEnum.CADASTRAR">
             <div class="p-field-radiobutton">
                 <p-radioButton name="tipoPessoa" [value]="tipoPessoaEnum.PF" [(ngModel)]="usuario.pessoa.tipoPessoa" (onClick)="verificarPessoa()"
                     inputId="tipoPessoa1"></p-radioButton>
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="p-field p-col-6 p-lg-3">
+        <div class="p-field p-col-6 p-lg-3" *ngIf="acao == acoesEnum.CADASTRAR">
             <div class="p-field-radiobutton">
                 <p-radioButton name="tipoPessoa" [value]="tipoPessoaEnum.PJ" [(ngModel)]="usuario.pessoa.tipoPessoa" (onClick)="verificarPessoa()"
                     inputId="tipoPessoa2"></p-radioButton>
@@ -42,7 +42,7 @@
         </div>
         <div class="p-col-12 p-lg-6"></div>
 
-        <div class="p-field p-col-12 p-lg-6" *ngIf="isPj()">
+        <div class="p-field p-col-12 p-lg-6" *ngIf="isPj() && acao == acoesEnum.CADASTRAR">
             <label>Empresa</label>
             <p-dropdown [options]="empresas" [(ngModel)]="usuario.pessoa.empresa"
                 placeholder="Selecione uma empresa"></p-dropdown>

@@ -31,7 +31,7 @@
                     <td>{{usuario.login}}</td>
                     <td>
                         <i class="pi pi-user-edit margin-right-5 click" (click)="editarUsuario(usuario.id)"></i>
-                        <i class="pi pi-trash color-red click" (click)="excluirUsuario(usuario.id)"></i>
+                        <i class="pi pi-trash color-red click" (click)="excluirUsuario(usuario.id)" *ngIf="hasRoleAdm()"></i>
                     </td>
                 </tr>
             </ng-template>

@@ -6,6 +6,7 @@ import { AppConstants } from '../app-constants';
 import { MessageService } from 'primeng/api';
 import { MensagemUtil } from '../utils/mensagem.util';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -44,5 +45,21 @@ export class AuthService {
     } else {
       return false;
     }
+  }
+
+  public decodePayloadJWT(): any {
+    let token = localStorage.getItem('token');
+    return JSON.parse(atob(token.split(".")[1]));
+  }
+
+  public getRoles(): string[] {
+    return this.decodePayloadJWT().ROLES;
+  }
+
+  public hasHole(roles: string[]): boolean {
+    let usuarioRoles = this.getRoles();
+
+    return  usuarioRoles.filter(role => roles.includes(role)).length > 0;
+
   }
 }

@@ -20,5 +20,9 @@ export class DividaClienteService {
   quitarDivida(quitarDivida: QuitarDivida): Observable<any> {
     return this.http.post<any>(`${this.resourceUrl}/quitar`, quitarDivida);
   }
+
+  listarMinhasDividas(): Observable<any> {
+    return this.http.get<any>(this.resourceUrl + '/cliente');
+  }
   
 }

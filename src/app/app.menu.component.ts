@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api/menuitem';
 import { AuthService } from './login/auth.service';
+import { RolesEnum } from './utils/roles.enum';
 
 @Component({
     selector: 'app-menu',
@@ -16,25 +17,37 @@ import { AuthService } from './login/auth.service';
 })
 export class AppMenuComponent implements OnInit {
 
-  items: MenuItem[];
+    items: MenuItem[] = [];
 
-  constructor(private router: Router, private authService: AuthService) { }
+    constructor(private router: Router, private authService: AuthService) { }
 
-  ngOnInit() {
-    this.items = [
-        {
-            label: 'Usuários',
-            icon: 'pi pi-user',
-            routerLink: 'usuario'
+    ngOnInit() {
+        this.setMenu();
+    }
 
-        },
-        {
-            label: 'Dívidas de Clientes',
-            icon: 'pi pi-money-bill',
-            routerLink: 'divida-cliente'
+    setMenu() {
+        if (this.authService.hasHole([RolesEnum.ADMIN, RolesEnum.EMPRESA])) {
+            this.items.push({
+                label: 'Usuários',
+                icon: 'pi pi-user',
+                routerLink: 'usuario',
+            });
+
+            this.items.push({
+                label: 'Dívidas de Clientes',
+                icon: 'pi pi-money-bill',
+                routerLink: 'divida-cliente'
+            });
         }
-    ];
-}
+
+        if (this.authService.hasHole([RolesEnum.CLIENTE]) ) {
+            this.items.push({
+                label: 'Minhas dívidas',
+                icon: 'pi pi-money-bill',
+                routerLink: 'minhas-dividas',
+            });
+        }
+    }
 
     public sair() {
         localStorage.clear();

@@ -1,0 +1,66 @@
+<div class="margin-20">
+
+    <div>
+        <h1 class="text-center">Minhas Dívidas</h1>
+    </div>
+
+    <div class="card margin-y-10">
+        <p-table #dt [value]="dividas" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="nomeEmpresa">Empresa <p-sortIcon field="nomeEmpresa"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="total">Total (R$) <p-sortIcon field="total"></p-sortIcon>
+                    </th>
+                    <th>Ações</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-divida>
+                <tr>
+                    <td>{{divida.nomeEmpresa}}</td>
+                    <td>{{divida.total | currency}}</td>
+                    <td>
+                        <i class="pi pi-eye margin-right-5 click color-blue"
+                            (click)="visualizarCompra(divida)"></i>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                  <td [attr.colspan]="3">
+                      Nenhum registro encontrado.
+                  </td>
+              </tr>
+          </ng-template>
+        </p-table>
+    </div>
+
+</div>
+
+<p-dialog header="Minhas Compras" [(visible)]="displayModal" [modal]="true" [draggable]="false" [resizable]="false" >
+
+    <div>
+       <h3>
+        Compras em {{dividaSelecionada.nomeEmpresa}}
+       </h3> 
+
+       <div class="card margin-y-10">
+        <p-table #dt [value]="compras" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="valorCompra">Valor da Compra (R$) <p-sortIcon field="valorCompra"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="dataCompra">Data <p-sortIcon field="dataCompra"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-compras>
+                <tr>
+                    <td>{{compras.valorCompra | currency}}</td>
+                    <td>{{compras.dataCompra}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    </div>
+</p-dialog>

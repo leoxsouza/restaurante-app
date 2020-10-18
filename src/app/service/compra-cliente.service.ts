@@ -17,4 +17,8 @@ export class CompraClienteService {
     return this.http.post( this.resourceUrl, compraCliente );
   }
 
+  getComprasPorEmpresa(idEmpresa: number): Observable<any> {
+    return this.http.get( `${this.resourceUrl}${idEmpresa}`);
+  }
+
 }
