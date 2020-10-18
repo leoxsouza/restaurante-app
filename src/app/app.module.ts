@@ -19,6 +19,7 @@ import { MessageService } from 'primeng/api';
 import { DividaClienteModule } from './components/divida-cliente/divida-cliente.module';
 import { MinhasDividasModule } from './components/minhas-dividas/minhas-dividas.module';
 import { SobrasModule } from './components/sobras/sobras.module';
+import { ProdutoModule } from './components/produto/produto.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SobrasModule } from './components/sobras/sobras.module';
     BlockUIModule.forRoot(),
     DividaClienteModule,
     MinhasDividasModule,
-    SobrasModule
+    SobrasModule,
+    ProdutoModule
 
   ],
   providers: [AuthService, AuthGuard, MessageService],

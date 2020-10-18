@@ -40,6 +40,12 @@ export class AppMenuComponent implements OnInit {
             });
 
             this.items.push({
+                label: 'Produtos',
+                icon: 'pi pi-shopping-cart',
+                routerLink: 'produto'
+            });
+
+            this.items.push({
                 label: 'Sobras',
                 icon: 'pi pi-minus',
                 routerLink: 'sobras'
