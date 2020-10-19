@@ -5,10 +5,10 @@ export class Usuario {
     id: number;
     login: string;
     senha: string;
-    pessoa: {nome: string, tipoPessoa: string, cpf: string, empresa: SelectItem}
+    pessoa: {nome: string, tipoPessoa: string, cpf: string, empresa: SelectItem, celular: string}
     role: { id: string, descricaoRole: string };
 
     constructor(){
-        this.pessoa = {nome: '', tipoPessoa: '', cpf: '', empresa: undefined};
+        this.pessoa = {nome: '', tipoPessoa: '', cpf: '', empresa: undefined, celular: ''};
     }
 }
