@@ -5,7 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { AppConstants } from '../app-constants';
 import { MessageService } from 'primeng/api';
 import { MensagemUtil } from '../utils/mensagem.util';
-
+import { NgBlockUI, BlockUI } from 'ng-block-ui';
+import { finalize } from 'rxjs/operators';
+import { RolesEnum } from '../utils/roles.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,8 @@ export class AuthService {
 
   usuarioAutenticado = new EventEmitter<boolean>();
 
+  @BlockUI() blockUI: NgBlockUI;
+
   constructor(private router: Router, private http: HttpClient,
     private messageService: MessageService,) {
       this.usuarioAutenticado.emit(this.usuarioEstaAutenticado());
@@ -22,7 +26,10 @@ export class AuthService {
 
   fazerLogin(usuario: Usuario) {
 
-    this.http.post<any>(AppConstants.baseLogin, usuario).subscribe(data => {
+    this.blockUI.start(MensagemUtil.BLOCKUI_CARREGANDO);
+    this.http.post<any>(AppConstants.baseLogin, usuario)
+    .pipe(finalize(() => this.blockUI.stop()))
+    .subscribe(data => {
 
       let token = data.token;
 
@@ -30,21 +37,31 @@ export class AuthService {
 
       this.usuarioAutenticado.emit(true);
 
-      this.router.navigate(['/']);
+      if (this.hasHole([RolesEnum.CLIENTE])) {
+        this.router.navigate(['/minhas-dividas']);
+      } else {
+        this.router.navigate(['/usuario']);
+      }
 
     }, error => {
-      this.messageService.add({severity:'error', summary: MensagemUtil.ERRO, detail: MensagemUtil.ERRO_LOGIN});
+      this.messageService.add({severity:'error', summary: MensagemUtil.ERRO, detail: error});
       this.usuarioAutenticado.emit(false);
     })
   }
 
   usuarioEstaAutenticado() {
     if (localStorage.getItem('token') !== null &&
-      localStorage.getItem('token').toString().trim() !== null) {
+      localStorage.getItem('token').toString().trim() !== null && this.naoExpirou()) {
       return true;
     } else {
       return false;
     }
+  }
+
+  naoExpirou() {
+    let token = localStorage.getItem('token');
+    let exp = JSON.parse(atob(token.split(".")[1])).exp;
+    return exp >= new Date().getTime() / 1000;
   }
 
   public decodePayloadJWT(): any {

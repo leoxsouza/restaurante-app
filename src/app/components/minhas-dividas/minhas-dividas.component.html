@@ -28,7 +28,7 @@
             <ng-template pTemplate="emptymessage" let-columns>
               <tr>
                   <td [attr.colspan]="3">
-                      Nenhum registro encontrado.
+                      Você não possuí nenhuma dívida.
                   </td>
               </tr>
           </ng-template>
@@ -42,7 +42,7 @@
     <div>
        <h3>
         Compras em {{dividaSelecionada.nomeEmpresa}}
-       </h3> 
+       </h3>
 
        <div class="card margin-y-10">
         <p-table #dt [value]="compras" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]">

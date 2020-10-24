@@ -71,7 +71,7 @@ export class UsuarioFormComponent implements OnInit {
     .subscribe( () => {
       this.router.navigate( [ '/usuario' ] );
       this.messageService.add({severity:'success', summary: MensagemUtil.SUCESSO, detail: `Usuário ${MensagemUtil.SALVO}`});
-    }, error => this.messageService.add({severity:'error', summary: MensagemUtil.SUCESSO, detail: `Erro ao cadastrar usuário`}));
+    }, error => this.messageService.add({severity:'error', summary: MensagemUtil.ERRO, detail: error}));
 
   }
 

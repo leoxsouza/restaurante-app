@@ -10,8 +10,8 @@ import { PRIMENG_IMPORTS } from './primeng-imports';
 import { AppMenuComponent } from './app.menu.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './login/auth.service';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpInterceptorModule } from './service/header-interceptor.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HeaderInterceptorService } from './service/header-interceptor.service';
 import { UsuarioModule } from './components/usuario/usuario.module';
 import { AuthGuard } from './guards/auth.guard';
 import { BlockUIModule } from 'ng-block-ui';
@@ -35,7 +35,6 @@ import { ProdutoModule } from './components/produto/produto.module';
     MenubarModule,
     PRIMENG_IMPORTS,
     HttpClientModule,
-    HttpInterceptorModule,
     UsuarioModule,
     BlockUIModule.forRoot(),
     DividaClienteModule,
@@ -44,7 +43,12 @@ import { ProdutoModule } from './components/produto/produto.module';
     ProdutoModule
 
   ],
-  providers: [AuthService, AuthGuard, MessageService],
+  providers: [AuthService, AuthGuard, MessageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
